@@ -1,4 +1,5 @@
 using Grpc.Core;
+using Server.DatabaseContext;
 
 namespace Server.Services;
 
@@ -6,11 +7,14 @@ public class GreeterService : Greeter.GreeterBase
 {
     private readonly Database_Operations.DatabaseContext _databaseContext;
     private readonly ILogger<GreeterService> _logger;
+    private readonly GreeterDatabaseContext _repository;
 
-    public GreeterService(ILogger<GreeterService> logger, Database_Operations.DatabaseContext databaseContext)
+    public GreeterService(ILogger<GreeterService> logger, Database_Operations.DatabaseContext databaseContext,
+        GreeterDatabaseContext repository)
     {
         _logger = logger;
         _databaseContext = databaseContext;
+        _repository = repository;
     }
 
     public override async Task RequestAllData(
@@ -22,7 +26,7 @@ public class GreeterService : Greeter.GreeterBase
 
         foreach (ResponseData entry in dataRecievedFromDatabase)
         {
-          //  await Task.Delay(5000);
+            //  await Task.Delay(5000);
             await responseStream.WriteAsync(
                 new ResponseData
                 {
@@ -40,49 +44,109 @@ public class GreeterService : Greeter.GreeterBase
         });
     }
 
-    public override Task<HelloReply> SayGreetings(HelloRequest request, ServerCallContext context)
+    public override Task<HelloReply>? SayGreetings(HelloRequest request, ServerCallContext context)
     {
-        _databaseContext.Query<HelloReply>(
-            $"INSERT INTO Greetings" +
-            $"(NAME, TIME) " +
-            $"VALUES" +
-            $"('{request.Name}','{DateTime.Now:U}')");
+        Task<HelloReply>? returnVariables = null;
+        bool status = _repository.SayGreetingRepository(request, context);
 
-        _logger.LogInformation("SayGreetings inserted into database successfully ");
-        return Task.FromResult(new HelloReply
+        try
         {
-            Message = $"Greeting from server {request.Name}!"
-        });
+            if (status)
+            {
+                _logger.LogInformation("SayGreetings inserted into database successfully ");
+                returnVariables = Task.FromResult(new HelloReply
+                {
+                    Message = $"Greeting from server {request.Name}!"
+                });
+            }
+            else
+            {
+                _logger.LogError("Error in Executing query SayGreetings");
+                returnVariables = Task.FromResult(new HelloReply
+                {
+                    Message = "Error in Pinging/Connecting the Database "
+                });
+            }
+        }
+        catch (Exception e)
+        {
+            _logger.LogError(e, "Error in Sending Back the response for SayGreeting RPC");
+        }
+
+        return returnVariables;
     }
 
-    public override Task<UpdateResponseStatus> UpdatingRecords(Record request, ServerCallContext context)
+    public override Task<UpdateResponseStatus>? UpdatingRecords(Record request, ServerCallContext context)
     {
-        _databaseContext.Query<UpdateResponseStatus>(
-            $"UPDATE Greetings SET time = '{DateTime.Now:u}' WHERE Name = '{request.RecordName}';");
+        Task<UpdateResponseStatus>? returningvariables = null;
+        var status = _repository.UpdatingRecordsRepository(request, context);
 
-
-        _logger.LogInformation(
-            $@"Record naming {request.RecordName} Time update by the server  with time - {DateTime.Now:u}");
-
-
-        return Task.FromResult(
-            new UpdateResponseStatus
+        try
+        {
+            if (status)
             {
-                Status = $"Time of Recording Updated for Name {request.RecordName}"
-            });
+                _logger.LogInformation(
+                    $@"Record naming {request.RecordName} Time update by the server  with time - {DateTime.Now:u}");
+
+                returningvariables = Task.FromResult(new UpdateResponseStatus
+                {
+                    Status = $"Time of Recording Updated for Name {request.RecordName}"
+                });
+                return returningvariables;
+            }
+            else
+            {
+                _logger.LogError("Error in Query Execution");
+
+                returningvariables = Task.FromResult(new UpdateResponseStatus
+                {
+                    Status = "Unreachable Database or incorrect query execution"
+                });
+            }
+        }
+
+        catch (Exception e)
+        {
+            _logger.LogError("error in executing UpdatingRecord RPC");
+        }
+
+        return returningvariables;
     }
 
     public override Task<DeletionStatus> DeletingRecord(Record_deletion request, ServerCallContext context)
     {
-        _databaseContext.Query<DeletionStatus>(
-            $" DELETE FROM Greetings WHERE Name ='{request.RecordName}';");
+        Task<DeletionStatus>? returningvariables = null;
+        var status = _repository.DeletingRecordRepository(request, context);
 
-        _logger.LogInformation($"Record  naming {request.RecordName} deleted from database ");
-
-        return Task.FromResult(
-            new DeletionStatus
+        try
+        {
+            if (status)
             {
-                DeletionResponseStatus = $"Record naming {request.RecordName} deleted successfully"
-            });
+                _logger.LogInformation(
+                    $"Record  naming {request.RecordName} deleted from database ");
+
+                returningvariables = Task.FromResult(
+                    new DeletionStatus
+                    {
+                        DeletionResponseStatus = $"Record naming {request.RecordName} deleted successfully"
+                    });
+                return returningvariables;
+            }
+            else
+            {
+                _logger.LogError("Error in Query Execution");
+                returningvariables = Task.FromResult(
+                    new DeletionStatus
+                    {
+                        DeletionResponseStatus = "Unreachable Database or incorrect query execution"
+                    });
+            }
+        }
+
+        catch (Exception e)
+        {
+            _logger.LogError("error in executing DeletingRecord RPC");
+        }
+        return returningvariables;
     }
 }

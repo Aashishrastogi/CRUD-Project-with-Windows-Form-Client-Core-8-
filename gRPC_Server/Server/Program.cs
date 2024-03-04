@@ -1,6 +1,7 @@
 using Server.Services;
 using Serilog;
 using Server.Database_Operations;
+using Server.DatabaseContext;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -52,13 +53,14 @@ builder.Configuration.AddJsonFile("appsettings.json", false);
 });*/
 
 builder.Services.AddSingleton<DatabaseContext>();
+builder.Services.AddSingleton<GreeterDatabaseContext>();
 
 var app = builder.Build();
 
 
 // Configure the HTTP request pipeline.
 app.MapGrpcService<GreeterService>();
-
+app.Services.GetRequiredService<GreeterDatabaseContext>();
 var databaseServices = app.Services.GetRequiredService<DatabaseContext>();
 
 var status = databaseServices.Preprocessing_Database(builder.Configuration.GetValue<int>("DatabaseOperations"));
