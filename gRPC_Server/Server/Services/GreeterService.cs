@@ -10,14 +10,16 @@ public class GreeterService : Greeter.GreeterBase
     private readonly DatabaseContext _databaseContext;
     private readonly ILogger<GreeterService> _logger;
 
-    public override async Task RequestAllData(DataRequest request, IServerStreamWriter<Data> responseStream,
+    public override async Task RequestAllData(
+        DataRequest request, 
+        IServerStreamWriter<Data> responseStream,
         ServerCallContext context)
     {
         var datas = _databaseContext.Query<Data>("SELECT * FROM Greetings");
-       
+
         foreach (Data entry in datas)
         {
-            await responseStream.WriteAsync(new Data { Name = $"{entry.Name}"});
+            await responseStream.WriteAsync(new Data { Name = $"{entry.Name}" });
         }
     }
 
