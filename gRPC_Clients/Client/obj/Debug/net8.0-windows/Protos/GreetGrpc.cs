@@ -55,7 +55,11 @@ namespace Server {
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Marshaller<global::Server.DataRequest> __Marshaller_greet_DataRequest = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Server.DataRequest.Parser));
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
-    static readonly grpc::Marshaller<global::Server.Data> __Marshaller_greet_Data = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Server.Data.Parser));
+    static readonly grpc::Marshaller<global::Server.ResponseData> __Marshaller_greet_ResponseData = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Server.ResponseData.Parser));
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+    static readonly grpc::Marshaller<global::Server.Record> __Marshaller_greet_Record = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Server.Record.Parser));
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+    static readonly grpc::Marshaller<global::Server.UpdateResponseStatus> __Marshaller_greet_UpdateResponseStatus = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Server.UpdateResponseStatus.Parser));
 
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Method<global::Server.HelloRequest, global::Server.HelloReply> __Method_SayHello = new grpc::Method<global::Server.HelloRequest, global::Server.HelloReply>(
@@ -74,12 +78,20 @@ namespace Server {
         __Marshaller_greet_HelloReply);
 
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
-    static readonly grpc::Method<global::Server.DataRequest, global::Server.Data> __Method_RequestAllData = new grpc::Method<global::Server.DataRequest, global::Server.Data>(
+    static readonly grpc::Method<global::Server.DataRequest, global::Server.ResponseData> __Method_RequestAllData = new grpc::Method<global::Server.DataRequest, global::Server.ResponseData>(
         grpc::MethodType.ServerStreaming,
         __ServiceName,
         "RequestAllData",
         __Marshaller_greet_DataRequest,
-        __Marshaller_greet_Data);
+        __Marshaller_greet_ResponseData);
+
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+    static readonly grpc::Method<global::Server.Record, global::Server.UpdateResponseStatus> __Method_UpdatingRecords = new grpc::Method<global::Server.Record, global::Server.UpdateResponseStatus>(
+        grpc::MethodType.Unary,
+        __ServiceName,
+        "UpdatingRecords",
+        __Marshaller_greet_Record,
+        __Marshaller_greet_UpdateResponseStatus);
 
     /// <summary>Service descriptor</summary>
     public static global::Google.Protobuf.Reflection.ServiceDescriptor Descriptor
@@ -183,14 +195,34 @@ namespace Server {
         return CallInvoker.AsyncUnaryCall(__Method_SayGreetings, null, options, request);
       }
       [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
-      public virtual grpc::AsyncServerStreamingCall<global::Server.Data> RequestAllData(global::Server.DataRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      public virtual grpc::AsyncServerStreamingCall<global::Server.ResponseData> RequestAllData(global::Server.DataRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
       {
         return RequestAllData(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }
       [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
-      public virtual grpc::AsyncServerStreamingCall<global::Server.Data> RequestAllData(global::Server.DataRequest request, grpc::CallOptions options)
+      public virtual grpc::AsyncServerStreamingCall<global::Server.ResponseData> RequestAllData(global::Server.DataRequest request, grpc::CallOptions options)
       {
         return CallInvoker.AsyncServerStreamingCall(__Method_RequestAllData, null, options, request);
+      }
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual global::Server.UpdateResponseStatus UpdatingRecords(global::Server.Record request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return UpdatingRecords(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual global::Server.UpdateResponseStatus UpdatingRecords(global::Server.Record request, grpc::CallOptions options)
+      {
+        return CallInvoker.BlockingUnaryCall(__Method_UpdatingRecords, null, options, request);
+      }
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual grpc::AsyncUnaryCall<global::Server.UpdateResponseStatus> UpdatingRecordsAsync(global::Server.Record request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return UpdatingRecordsAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual grpc::AsyncUnaryCall<global::Server.UpdateResponseStatus> UpdatingRecordsAsync(global::Server.Record request, grpc::CallOptions options)
+      {
+        return CallInvoker.AsyncUnaryCall(__Method_UpdatingRecords, null, options, request);
       }
       /// <summary>Creates a new instance of client from given <c>ClientBaseConfiguration</c>.</summary>
       [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]

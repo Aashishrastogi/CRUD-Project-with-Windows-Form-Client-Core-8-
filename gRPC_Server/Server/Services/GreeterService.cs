@@ -11,15 +11,21 @@ public class GreeterService : Greeter.GreeterBase
     private readonly ILogger<GreeterService> _logger;
 
     public override async Task RequestAllData(
-        DataRequest request, 
-        IServerStreamWriter<Data> responseStream,
+        DataRequest request,
+        IServerStreamWriter<ResponseData> responseStream,
         ServerCallContext context)
     {
-        var datas = _databaseContext.Query<Data>("SELECT * FROM Greetings");
+        var datas = _databaseContext.Query<ResponseData>("SELECT * FROM Greetings");
 
-        foreach (Data entry in datas)
+        foreach (ResponseData entry in datas)
         {
-            await responseStream.WriteAsync(new Data { Name = $"{entry.Name}" });
+            await Task.Delay(500);
+            await responseStream.WriteAsync(
+                new ResponseData
+                {
+                    Name = $"{entry.Name}",
+                    Time = $"{entry.Time}"
+                });
         }
     }
 
@@ -43,12 +49,44 @@ public class GreeterService : Greeter.GreeterBase
             $"INSERT INTO Greetings" +
             $"(NAME, TIME) " +
             $"VALUES" +
-            $" ('{request.Name}','{DateTime.UtcNow.TimeOfDay}')");
+            $" ('{request.Name}','{DateTime.Now:U}')");
 
         _logger.LogInformation("SayGreetings inserted into database successfully ");
         return Task.FromResult(new HelloReply
         {
-            Message = "Greeting from Server " + request.Name
+            Message = $"Greeting from server {request.Name}!"
+        });
+    }
+
+    /*public override Task<UpdateStatus> UpdateData(
+        RequestUpdate request,
+        ServerCallContext context
+    )
+    {
+        _databaseContext.Query<UpdateStatus>(
+            $" UPDATE Greetings " +
+            $"SET time = {DateTime.Now:U} " +
+            $"WHERE Name = {request.Name}"
+            );
+
+        return Task.FromResult(new UpdateStatus
+        {
+            Status = $"Time of Recording Updated for Name {request.Name}"
+        });
+    }*/
+    public override Task<UpdateResponseStatus> UpdatingRecords(Record request, ServerCallContext context)
+    {
+        _databaseContext.Query<UpdateResponseStatus>(
+            $"UPDATE Greetings SET time = '{DateTime.Now:u}' WHERE Name = '{request.RecordName}';");
+
+
+        _logger.LogInformation(
+            $"Record naming {request.RecordName} Time update by the server  with time - {DateTime.Now:u}");
+
+
+        return Task.FromResult(new UpdateResponseStatus
+        {
+            Status = $"Time of Recording Updated for Name {request.RecordName}"
         });
     }
 }

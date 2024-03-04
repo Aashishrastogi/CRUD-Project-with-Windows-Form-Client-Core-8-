@@ -701,11 +701,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Visual Studio Project Folder\\gRPC_Clients\\Client\\Client.csproj",
+      "projectUniqueName": "D:\\Combined projects\\CRUD Using gRPC\\gRPC_Clients\\Client\\Client.csproj",
       "projectName": "Client",
-      "projectPath": "D:\\Visual Studio Project Folder\\gRPC_Clients\\Client\\Client.csproj",
+      "projectPath": "D:\\Combined projects\\CRUD Using gRPC\\gRPC_Clients\\Client\\Client.csproj",
       "packagesPath": "C:\\Users\\rasto\\.nuget\\packages\\",
-      "outputPath": "D:\\Visual Studio Project Folder\\gRPC_Clients\\Client\\obj\\",
+      "outputPath": "D:\\Combined projects\\CRUD Using gRPC\\gRPC_Clients\\Client\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

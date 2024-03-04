@@ -1,21 +1,17 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "D:\\Visual Studio Project Folder\\gRPC_Clients\\",
+  "WorkspaceRootPath": "D:\\Combined projects\\CRUD Using gRPC\\gRPC_Clients\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{DD45FD4B-ECAC-4311-8DF8-806A83AFF899}|Client\\Client.csproj|d:\\visual studio project folder\\grpc_clients\\client\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{DD45FD4B-ECAC-4311-8DF8-806A83AFF899}|Client\\Client.csproj|d:\\combined projects\\crud using grpc\\grpc_clients\\client\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{DD45FD4B-ECAC-4311-8DF8-806A83AFF899}|Client\\Client.csproj|solutionrelative:client\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{DD45FD4B-ECAC-4311-8DF8-806A83AFF899}|Client\\Client.csproj|D:\\Visual Studio Project Folder\\gRPC_Clients\\client\\services\\initialization.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{DD45FD4B-ECAC-4311-8DF8-806A83AFF899}|Client\\Client.csproj|solutionrelative:client\\services\\initialization.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{DD45FD4B-ECAC-4311-8DF8-806A83AFF899}|Client\\Client.csproj|D:\\Visual Studio Project Folder\\gRPC_Clients\\client\\protos\\greet.proto||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "AbsoluteMoniker": "D:0:0:{DD45FD4B-ECAC-4311-8DF8-806A83AFF899}|Client\\Client.csproj|d:\\combined projects\\crud using grpc\\grpc_clients\\client\\protos\\greet.proto||{3B902123-F8A7-4915-9F01-361F908088D0}",
       "RelativeMoniker": "D:0:0:{DD45FD4B-ECAC-4311-8DF8-806A83AFF899}|Client\\Client.csproj|solutionrelative:client\\protos\\greet.proto||{3B902123-F8A7-4915-9F01-361F908088D0}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{DD45FD4B-ECAC-4311-8DF8-806A83AFF899}|Client\\Client.csproj|D:\\Visual Studio Project Folder\\gRPC_Clients\\client\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "AbsoluteMoniker": "D:0:0:{DD45FD4B-ECAC-4311-8DF8-806A83AFF899}|Client\\Client.csproj|d:\\combined projects\\crud using grpc\\grpc_clients\\client\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
       "RelativeMoniker": "D:0:0:{DD45FD4B-ECAC-4311-8DF8-806A83AFF899}|Client\\Client.csproj|solutionrelative:client\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     }
   ],
@@ -26,7 +22,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 4,
           "Children": [
             {
               "$type": "Bookmark",
@@ -42,53 +38,40 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "Form1.cs",
-              "DocumentMoniker": "D:\\Visual Studio Project Folder\\gRPC_Clients\\Client\\Form1.cs",
-              "RelativeDocumentMoniker": "Client\\Form1.cs",
-              "ToolTip": "D:\\Visual Studio Project Folder\\gRPC_Clients\\Client\\Form1.cs",
-              "RelativeToolTip": "Client\\Form1.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAwAAAAWAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-01T09:09:05.711Z",
+              "DocumentIndex": 1,
+              "Title": "greet.proto",
+              "DocumentMoniker": "D:\\Combined projects\\CRUD Using gRPC\\gRPC_Clients\\Client\\Protos\\greet.proto",
+              "RelativeDocumentMoniker": "Client\\Protos\\greet.proto",
+              "ToolTip": "D:\\Combined projects\\CRUD Using gRPC\\gRPC_Clients\\Client\\Protos\\greet.proto",
+              "RelativeToolTip": "Client\\Protos\\greet.proto",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAwAAAAVAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003853|",
+              "WhenOpened": "2024-03-04T06:58:05.741Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "Initialization.cs",
-              "DocumentMoniker": "D:\\Visual Studio Project Folder\\gRPC_Clients\\Client\\Services\\Initialization.cs",
-              "RelativeDocumentMoniker": "Client\\Services\\Initialization.cs",
-              "ToolTip": "D:\\Visual Studio Project Folder\\gRPC_Clients\\Client\\Services\\Initialization.cs",
-              "RelativeToolTip": "Client\\Services\\Initialization.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAADwvwAAAAAAAAAA",
+              "DocumentIndex": 0,
+              "Title": "Form1.cs",
+              "DocumentMoniker": "D:\\Combined projects\\CRUD Using gRPC\\gRPC_Clients\\Client\\Form1.cs",
+              "RelativeDocumentMoniker": "Client\\Form1.cs",
+              "ToolTip": "D:\\Combined projects\\CRUD Using gRPC\\gRPC_Clients\\Client\\Form1.cs",
+              "RelativeToolTip": "Client\\Form1.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAB8AAAAsAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-01T08:48:12.52Z",
+              "WhenOpened": "2024-03-04T06:53:14.74Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "greet.proto",
-              "DocumentMoniker": "D:\\Visual Studio Project Folder\\gRPC_Clients\\Client\\Protos\\greet.proto",
-              "RelativeDocumentMoniker": "Client\\Protos\\greet.proto",
-              "ToolTip": "D:\\Visual Studio Project Folder\\gRPC_Clients\\Client\\Protos\\greet.proto",
-              "RelativeToolTip": "Client\\Protos\\greet.proto",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABUAAAAKAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003853|",
-              "WhenOpened": "2024-03-01T08:32:30.988Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
               "Title": "Form1.cs [Design]",
-              "DocumentMoniker": "D:\\Visual Studio Project Folder\\gRPC_Clients\\Client\\Form1.cs",
+              "DocumentMoniker": "D:\\Combined projects\\CRUD Using gRPC\\gRPC_Clients\\Client\\Form1.cs",
               "RelativeDocumentMoniker": "Client\\Form1.cs",
-              "ToolTip": "D:\\Visual Studio Project Folder\\gRPC_Clients\\Client\\Form1.cs [Design]",
+              "ToolTip": "D:\\Combined projects\\CRUD Using gRPC\\gRPC_Clients\\Client\\Form1.cs [Design]",
               "RelativeToolTip": "Client\\Form1.cs [Design]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-01T08:16:48.088Z",
+              "WhenOpened": "2024-03-04T06:53:34.842Z",
               "EditorCaption": " [Design]"
             }
           ]

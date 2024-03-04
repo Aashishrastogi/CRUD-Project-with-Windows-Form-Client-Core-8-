@@ -11,7 +11,7 @@ namespace Client.Services
     internal class Initialization
     {
 
-        public Greeter.GreeterClient Load()
+        public Greeter.GreeterClient? Load()
         {
             var channel = GrpcChannel.ForAddress("https://localhost:7157");
             var client = new Greeter.GreeterClient(channel);

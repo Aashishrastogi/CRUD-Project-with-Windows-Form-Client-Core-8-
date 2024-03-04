@@ -9,17 +9,28 @@ service Greeter {
   // Sends a greeting
   rpc SayHello (HelloRequest) returns (HelloReply);
   rpc SayGreetings (HelloRequest) returns (HelloReply);
-  rpc RequestAllData(DataRequest) returns (stream Data);
+  rpc RequestAllData(DataRequest) returns (stream ResponseData);
+  rpc UpdatingRecords(Record) returns (UpdateResponseStatus);
+  
+ }
+
+message Record{
+  string RecordName = 1 ; 
 }
+
+message UpdateResponseStatus{
+  string status = 1 ;
+}
+
 
 message DataRequest{
 	string request =1;
   
 }
 
-
-message Data {
+message ResponseData {
   string Name = 1;
+  string Time = 2;
   
 }
 

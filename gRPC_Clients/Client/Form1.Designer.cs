@@ -29,49 +29,34 @@
         private void InitializeComponent()
         {
             dgv_display = new DataGridView();
-            Column_name = new DataGridViewTextBoxColumn();
-            Column_time = new DataGridViewTextBoxColumn();
-            richTextBox_inputbox = new RichTextBox();
             button_insert = new Button();
-            button_read = new Button();
             button_update = new Button();
             button_delete = new Button();
             button_load = new Button();
+            richTextBox_name = new RichTextBox();
+            richTextBox_time = new RichTextBox();
+            label_name = new Label();
+            label_time = new Label();
+            label_status = new Label();
+            label_errors = new Label();
+            button_clearDGV = new Button();
             ((System.ComponentModel.ISupportInitialize)dgv_display).BeginInit();
             SuspendLayout();
             // 
             // dgv_display
             // 
+            dgv_display.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+            dgv_display.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCellsExceptHeaders;
             dgv_display.BackgroundColor = Color.PaleTurquoise;
-            dgv_display.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgv_display.Columns.AddRange(new DataGridViewColumn[] { Column_name, Column_time });
+            dgv_display.ColumnHeadersHeight = 34;
             dgv_display.Location = new Point(2, 6);
             dgv_display.Name = "dgv_display";
+            dgv_display.ReadOnly = true;
             dgv_display.RowHeadersWidth = 62;
-            dgv_display.Size = new Size(1600, 557);
+            dgv_display.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgv_display.Size = new Size(1057, 572);
             dgv_display.TabIndex = 0;
-            // 
-            // Column_name
-            // 
-            Column_name.HeaderText = "Name";
-            Column_name.MinimumWidth = 8;
-            Column_name.Name = "Column_name";
-            Column_name.Width = 150;
-            // 
-            // Column_time
-            // 
-            Column_time.HeaderText = "Time";
-            Column_time.MinimumWidth = 8;
-            Column_time.Name = "Column_time";
-            Column_time.Width = 150;
-            // 
-            // richTextBox_inputbox
-            // 
-            richTextBox_inputbox.Location = new Point(2, 569);
-            richTextBox_inputbox.Name = "richTextBox_inputbox";
-            richTextBox_inputbox.Size = new Size(715, 234);
-            richTextBox_inputbox.TabIndex = 1;
-            richTextBox_inputbox.Text = "";
+            dgv_display.CellClick += dgv_display_CellClick;
             // 
             // button_insert
             // 
@@ -81,15 +66,7 @@
             button_insert.TabIndex = 2;
             button_insert.Text = "Insert";
             button_insert.UseVisualStyleBackColor = true;
-            // 
-            // button_read
-            // 
-            button_read.Location = new Point(213, 829);
-            button_read.Name = "button_read";
-            button_read.Size = new Size(168, 62);
-            button_read.TabIndex = 3;
-            button_read.Text = "Read";
-            button_read.UseVisualStyleBackColor = true;
+            button_insert.Click += button_insert_Click;
             // 
             // button_update
             // 
@@ -99,6 +76,7 @@
             button_update.TabIndex = 4;
             button_update.Text = "Update";
             button_update.UseVisualStyleBackColor = true;
+            button_update.Click += button_update_Click;
             // 
             // button_delete
             // 
@@ -111,13 +89,82 @@
             // 
             // button_load
             // 
-            button_load.Location = new Point(764, 569);
+            button_load.Location = new Point(219, 829);
             button_load.Name = "button_load";
             button_load.Size = new Size(168, 62);
             button_load.TabIndex = 6;
-            button_load.Text = "Load";
+            button_load.Text = "Load Data From Database";
             button_load.UseVisualStyleBackColor = true;
             button_load.Click += button_load_Click;
+            // 
+            // richTextBox_name
+            // 
+            richTextBox_name.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            richTextBox_name.Location = new Point(114, 621);
+            richTextBox_name.Name = "richTextBox_name";
+            richTextBox_name.Size = new Size(341, 54);
+            richTextBox_name.TabIndex = 7;
+            richTextBox_name.Text = "";
+            // 
+            // richTextBox_time
+            // 
+            richTextBox_time.Enabled = false;
+            richTextBox_time.Location = new Point(114, 707);
+            richTextBox_time.Name = "richTextBox_time";
+            richTextBox_time.ReadOnly = true;
+            richTextBox_time.Size = new Size(341, 54);
+            richTextBox_time.TabIndex = 8;
+            richTextBox_time.Text = "Time will be recorded by the server";
+            // 
+            // label_name
+            // 
+            label_name.AutoSize = true;
+            label_name.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label_name.Location = new Point(30, 631);
+            label_name.Name = "label_name";
+            label_name.Size = new Size(78, 32);
+            label_name.TabIndex = 9;
+            label_name.Text = "Name";
+            // 
+            // label_time
+            // 
+            label_time.AutoSize = true;
+            label_time.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label_time.Location = new Point(30, 719);
+            label_time.Name = "label_time";
+            label_time.Size = new Size(67, 32);
+            label_time.TabIndex = 10;
+            label_time.Text = "Time";
+            // 
+            // label_status
+            // 
+            label_status.AutoSize = true;
+            label_status.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label_status.Location = new Point(520, 707);
+            label_status.Name = "label_status";
+            label_status.Size = new Size(78, 32);
+            label_status.TabIndex = 11;
+            label_status.Text = "Status";
+            // 
+            // label_errors
+            // 
+            label_errors.AutoSize = true;
+            label_errors.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label_errors.Location = new Point(520, 624);
+            label_errors.Name = "label_errors";
+            label_errors.Size = new Size(144, 32);
+            label_errors.TabIndex = 12;
+            label_errors.Text = "_____________";
+            // 
+            // button_clearDGV
+            // 
+            button_clearDGV.Location = new Point(840, 829);
+            button_clearDGV.Name = "button_clearDGV";
+            button_clearDGV.Size = new Size(168, 62);
+            button_clearDGV.TabIndex = 13;
+            button_clearDGV.Text = "Clear DataGridView";
+            button_clearDGV.UseVisualStyleBackColor = true;
+            button_clearDGV.Click += button_clearDGV_Click;
             // 
             // Form1
             // 
@@ -126,13 +173,18 @@
             AutoSize = true;
             AutoSizeMode = AutoSizeMode.GrowAndShrink;
             BackColor = Color.DarkCyan;
-            ClientSize = new Size(1618, 924);
+            ClientSize = new Size(1071, 929);
+            Controls.Add(button_clearDGV);
+            Controls.Add(label_errors);
+            Controls.Add(label_status);
+            Controls.Add(label_time);
+            Controls.Add(label_name);
+            Controls.Add(richTextBox_time);
+            Controls.Add(richTextBox_name);
             Controls.Add(button_load);
             Controls.Add(button_delete);
             Controls.Add(button_update);
-            Controls.Add(button_read);
             Controls.Add(button_insert);
-            Controls.Add(richTextBox_inputbox);
             Controls.Add(dgv_display);
             Name = "Form1";
             Text = "Client Application";
@@ -140,18 +192,22 @@
             Load += Form1_Load;
             ((System.ComponentModel.ISupportInitialize)dgv_display).EndInit();
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
 
         private DataGridView dgv_display;
-        private DataGridViewTextBoxColumn Column_name;
-        private DataGridViewTextBoxColumn Column_time;
-        private RichTextBox richTextBox_inputbox;
         private Button button_insert;
-        private Button button_read;
         private Button button_update;
         private Button button_delete;
         private Button button_load;
+        private RichTextBox richTextBox_name;
+        private RichTextBox richTextBox_time;
+        private Label label_name;
+        private Label label_time;
+        private Label label_status;
+        private Label label_errors;
+        private Button button_clearDGV;
     }
 }

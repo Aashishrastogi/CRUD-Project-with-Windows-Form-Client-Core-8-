@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "yl9KYzfAAQOZeQZ1xzxphChcObAsInNuyG/LnqVd9ta185OJATOtIeWKi6kX34BSj6rCLjUrQWNJk5gvW1cquQ==",
+  "dgSpecHash": "bCPxTEJsXLWJPcA3WTf4lk2zjwGOABY7qQX92qs2tEfq7PHB3Fdh2ovtqw2ZjY5lcIvRkr9DSLKIy+rIGxpAIg==",
   "success": true,
-  "projectFilePath": "D:\\Visual Studio Project Folder\\gRPC_Clients\\Client\\Client.csproj",
+  "projectFilePath": "D:\\Combined projects\\CRUD Using gRPC\\gRPC_Clients\\Client\\Client.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\rasto\\.nuget\\packages\\google.protobuf\\3.25.3\\google.protobuf.3.25.3.nupkg.sha512",
     "C:\\Users\\rasto\\.nuget\\packages\\grpc.core\\2.46.6\\grpc.core.2.46.6.nupkg.sha512",

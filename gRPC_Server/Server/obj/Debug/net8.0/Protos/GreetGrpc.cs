@@ -55,7 +55,11 @@ namespace Server {
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Marshaller<global::Server.DataRequest> __Marshaller_greet_DataRequest = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Server.DataRequest.Parser));
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
-    static readonly grpc::Marshaller<global::Server.Data> __Marshaller_greet_Data = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Server.Data.Parser));
+    static readonly grpc::Marshaller<global::Server.ResponseData> __Marshaller_greet_ResponseData = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Server.ResponseData.Parser));
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+    static readonly grpc::Marshaller<global::Server.Record> __Marshaller_greet_Record = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Server.Record.Parser));
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+    static readonly grpc::Marshaller<global::Server.UpdateResponseStatus> __Marshaller_greet_UpdateResponseStatus = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Server.UpdateResponseStatus.Parser));
 
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Method<global::Server.HelloRequest, global::Server.HelloReply> __Method_SayHello = new grpc::Method<global::Server.HelloRequest, global::Server.HelloReply>(
@@ -74,12 +78,20 @@ namespace Server {
         __Marshaller_greet_HelloReply);
 
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
-    static readonly grpc::Method<global::Server.DataRequest, global::Server.Data> __Method_RequestAllData = new grpc::Method<global::Server.DataRequest, global::Server.Data>(
+    static readonly grpc::Method<global::Server.DataRequest, global::Server.ResponseData> __Method_RequestAllData = new grpc::Method<global::Server.DataRequest, global::Server.ResponseData>(
         grpc::MethodType.ServerStreaming,
         __ServiceName,
         "RequestAllData",
         __Marshaller_greet_DataRequest,
-        __Marshaller_greet_Data);
+        __Marshaller_greet_ResponseData);
+
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+    static readonly grpc::Method<global::Server.Record, global::Server.UpdateResponseStatus> __Method_UpdatingRecords = new grpc::Method<global::Server.Record, global::Server.UpdateResponseStatus>(
+        grpc::MethodType.Unary,
+        __ServiceName,
+        "UpdatingRecords",
+        __Marshaller_greet_Record,
+        __Marshaller_greet_UpdateResponseStatus);
 
     /// <summary>Service descriptor</summary>
     public static global::Google.Protobuf.Reflection.ServiceDescriptor Descriptor
@@ -110,7 +122,13 @@ namespace Server {
       }
 
       [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
-      public virtual global::System.Threading.Tasks.Task RequestAllData(global::Server.DataRequest request, grpc::IServerStreamWriter<global::Server.Data> responseStream, grpc::ServerCallContext context)
+      public virtual global::System.Threading.Tasks.Task RequestAllData(global::Server.DataRequest request, grpc::IServerStreamWriter<global::Server.ResponseData> responseStream, grpc::ServerCallContext context)
+      {
+        throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
+      }
+
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual global::System.Threading.Tasks.Task<global::Server.UpdateResponseStatus> UpdatingRecords(global::Server.Record request, grpc::ServerCallContext context)
       {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
       }
@@ -125,7 +143,8 @@ namespace Server {
       return grpc::ServerServiceDefinition.CreateBuilder()
           .AddMethod(__Method_SayHello, serviceImpl.SayHello)
           .AddMethod(__Method_SayGreetings, serviceImpl.SayGreetings)
-          .AddMethod(__Method_RequestAllData, serviceImpl.RequestAllData).Build();
+          .AddMethod(__Method_RequestAllData, serviceImpl.RequestAllData)
+          .AddMethod(__Method_UpdatingRecords, serviceImpl.UpdatingRecords).Build();
     }
 
     /// <summary>Register service method with a service binder with or without implementation. Useful when customizing the service binding logic.
@@ -137,7 +156,8 @@ namespace Server {
     {
       serviceBinder.AddMethod(__Method_SayHello, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Server.HelloRequest, global::Server.HelloReply>(serviceImpl.SayHello));
       serviceBinder.AddMethod(__Method_SayGreetings, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Server.HelloRequest, global::Server.HelloReply>(serviceImpl.SayGreetings));
-      serviceBinder.AddMethod(__Method_RequestAllData, serviceImpl == null ? null : new grpc::ServerStreamingServerMethod<global::Server.DataRequest, global::Server.Data>(serviceImpl.RequestAllData));
+      serviceBinder.AddMethod(__Method_RequestAllData, serviceImpl == null ? null : new grpc::ServerStreamingServerMethod<global::Server.DataRequest, global::Server.ResponseData>(serviceImpl.RequestAllData));
+      serviceBinder.AddMethod(__Method_UpdatingRecords, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Server.Record, global::Server.UpdateResponseStatus>(serviceImpl.UpdatingRecords));
     }
 
   }
