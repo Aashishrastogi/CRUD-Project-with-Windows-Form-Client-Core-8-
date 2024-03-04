@@ -4401,11 +4401,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Rider Project Folder\\CRUD_gRPC\\gRPC-with-Database-connection-using-Dapper\\Server\\Server.csproj",
+      "projectUniqueName": "D:\\Combined projects\\CRUD Using gRPC\\gRPC_Server\\Server\\Server.csproj",
       "projectName": "Server",
-      "projectPath": "D:\\Rider Project Folder\\CRUD_gRPC\\gRPC-with-Database-connection-using-Dapper\\Server\\Server.csproj",
+      "projectPath": "D:\\Combined projects\\CRUD Using gRPC\\gRPC_Server\\Server\\Server.csproj",
       "packagesPath": "C:\\Users\\rasto\\.nuget\\packages\\",
-      "outputPath": "D:\\Rider Project Folder\\CRUD_gRPC\\gRPC-with-Database-connection-using-Dapper\\Server\\obj\\",
+      "outputPath": "D:\\Combined projects\\CRUD Using gRPC\\gRPC_Server\\Server\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

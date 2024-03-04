@@ -112,7 +112,35 @@ namespace Client
             }
             finally
             {
-                
+
+            }
+        }
+
+        private void button_delete_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (richTextBox_name.Text == string.Empty)
+                {
+                    label_errors.Text = @" Name should not be empty";
+
+                    return;
+                }
+
+                else
+                {
+                    Invoke(new Action((() =>
+                    {
+                        var deletionResponse =
+                            _client.DeletingRecordAsync(new Record_deletion{RecordName = $"{richTextBox_name.Text}" });
+                        label_status.Text = deletionResponse.ResponseAsync.Result.DeletionResponseStatus;
+                    })));
+                }
+
+            }
+            finally
+            {
+
             }
         }
     }

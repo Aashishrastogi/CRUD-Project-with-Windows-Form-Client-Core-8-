@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "lHzdpFesWFxI/IzBjkH7RGoIBz3oNdKhqAfA6vyCkPvIJYlFpeSE3ppRHS71fWczb+KM+Fo6lCaci30WTohbmg==",
+  "dgSpecHash": "sSIypD/ol4AcVaJFSz/pOz3zAiEd7v059FMGm5HupondCK1/RRuRKkLYeQRuA5XLeJsS/2Z5EWh2Yq71Qp9vNQ==",
   "success": true,
-  "projectFilePath": "D:\\Rider Project Folder\\CRUD_gRPC\\gRPC-with-Database-connection-using-Dapper\\Server\\Server.csproj",
+  "projectFilePath": "D:\\Combined projects\\CRUD Using gRPC\\gRPC_Server\\Server\\Server.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\rasto\\.nuget\\packages\\azure.core\\1.35.0\\azure.core.1.35.0.nupkg.sha512",
     "C:\\Users\\rasto\\.nuget\\packages\\azure.identity\\1.10.3\\azure.identity.1.10.3.nupkg.sha512",

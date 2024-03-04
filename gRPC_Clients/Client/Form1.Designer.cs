@@ -86,6 +86,7 @@
             button_delete.TabIndex = 5;
             button_delete.Text = "Delete";
             button_delete.UseVisualStyleBackColor = true;
+            button_delete.Click += button_delete_Click;
             // 
             // button_load
             // 

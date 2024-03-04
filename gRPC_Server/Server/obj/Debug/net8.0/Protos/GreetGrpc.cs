@@ -60,6 +60,10 @@ namespace Server {
     static readonly grpc::Marshaller<global::Server.Record> __Marshaller_greet_Record = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Server.Record.Parser));
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Marshaller<global::Server.UpdateResponseStatus> __Marshaller_greet_UpdateResponseStatus = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Server.UpdateResponseStatus.Parser));
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+    static readonly grpc::Marshaller<global::Server.Record_deletion> __Marshaller_greet_Record_deletion = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Server.Record_deletion.Parser));
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+    static readonly grpc::Marshaller<global::Server.DeletionStatus> __Marshaller_greet_DeletionStatus = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Server.DeletionStatus.Parser));
 
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Method<global::Server.HelloRequest, global::Server.HelloReply> __Method_SayHello = new grpc::Method<global::Server.HelloRequest, global::Server.HelloReply>(
@@ -92,6 +96,14 @@ namespace Server {
         "UpdatingRecords",
         __Marshaller_greet_Record,
         __Marshaller_greet_UpdateResponseStatus);
+
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+    static readonly grpc::Method<global::Server.Record_deletion, global::Server.DeletionStatus> __Method_DeletingRecord = new grpc::Method<global::Server.Record_deletion, global::Server.DeletionStatus>(
+        grpc::MethodType.Unary,
+        __ServiceName,
+        "DeletingRecord",
+        __Marshaller_greet_Record_deletion,
+        __Marshaller_greet_DeletionStatus);
 
     /// <summary>Service descriptor</summary>
     public static global::Google.Protobuf.Reflection.ServiceDescriptor Descriptor
@@ -133,6 +145,12 @@ namespace Server {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
       }
 
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual global::System.Threading.Tasks.Task<global::Server.DeletionStatus> DeletingRecord(global::Server.Record_deletion request, grpc::ServerCallContext context)
+      {
+        throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
+      }
+
     }
 
     /// <summary>Creates service definition that can be registered with a server</summary>
@@ -144,7 +162,8 @@ namespace Server {
           .AddMethod(__Method_SayHello, serviceImpl.SayHello)
           .AddMethod(__Method_SayGreetings, serviceImpl.SayGreetings)
           .AddMethod(__Method_RequestAllData, serviceImpl.RequestAllData)
-          .AddMethod(__Method_UpdatingRecords, serviceImpl.UpdatingRecords).Build();
+          .AddMethod(__Method_UpdatingRecords, serviceImpl.UpdatingRecords)
+          .AddMethod(__Method_DeletingRecord, serviceImpl.DeletingRecord).Build();
     }
 
     /// <summary>Register service method with a service binder with or without implementation. Useful when customizing the service binding logic.
@@ -158,6 +177,7 @@ namespace Server {
       serviceBinder.AddMethod(__Method_SayGreetings, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Server.HelloRequest, global::Server.HelloReply>(serviceImpl.SayGreetings));
       serviceBinder.AddMethod(__Method_RequestAllData, serviceImpl == null ? null : new grpc::ServerStreamingServerMethod<global::Server.DataRequest, global::Server.ResponseData>(serviceImpl.RequestAllData));
       serviceBinder.AddMethod(__Method_UpdatingRecords, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Server.Record, global::Server.UpdateResponseStatus>(serviceImpl.UpdatingRecords));
+      serviceBinder.AddMethod(__Method_DeletingRecord, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Server.Record_deletion, global::Server.DeletionStatus>(serviceImpl.DeletingRecord));
     }
 
   }
