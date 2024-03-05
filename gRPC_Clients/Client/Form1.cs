@@ -8,22 +8,28 @@ namespace Client
     public partial class Form1 : Form
     {
         private Greeter.GreeterClient _client;
-        private DataTable _dtresponse = new DataTable("ResponseTable");
+        private readonly DataTable _dtResponse = new DataTable("ResponseTable");
+       
 
         public Form1()
         {
             InitializeComponent();
-            _dtresponse.Columns.Add("Name", typeof(string));
-            _dtresponse.Columns.Add("time", typeof(string));
+            _dtResponse.Columns.Add("Name", typeof(string));
+            _dtResponse.Columns.Add("time", typeof(string));
+
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
             var startup = new Initialization();
-            _client = startup.Load();
+            _client = startup.Load(ConnectionStatus)!;
+            dgv_display.DataSource = _dtResponse;
 
-            dgv_display.DataSource = _dtresponse;
+        }
 
+        private void ConnectionStatus(string status)
+        {
+            richTextBox_log.AppendText(status);
         }
 
         private async void button_load_Click(object sender, EventArgs e)
@@ -41,7 +47,7 @@ namespace Client
                 {
                     Invoke(new Action(() =>
                     {
-                        _dtresponse.Rows.Add(
+                        _dtResponse.Rows.Add(
                         message.Name,
                         message.Time
                         );
@@ -84,7 +90,7 @@ namespace Client
 
         private void button_clearDGV_Click(object sender, EventArgs e)
         {
-            _dtresponse.Rows.Clear();
+            _dtResponse.Rows.Clear();
 
         }
 

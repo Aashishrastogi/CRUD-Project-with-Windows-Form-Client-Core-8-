@@ -3,16 +3,24 @@
   "WorkspaceRootPath": "D:\\Combined projects\\CRUD Using gRPC\\gRPC_Clients\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{DD45FD4B-ECAC-4311-8DF8-806A83AFF899}|Client\\Client.csproj|d:\\combined projects\\crud using grpc\\grpc_clients\\client\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{DD45FD4B-ECAC-4311-8DF8-806A83AFF899}|Client\\Client.csproj|D:\\Combined projects\\CRUD Using gRPC\\gRPC_Clients\\client\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{DD45FD4B-ECAC-4311-8DF8-806A83AFF899}|Client\\Client.csproj|solutionrelative:client\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{DD45FD4B-ECAC-4311-8DF8-806A83AFF899}|Client\\Client.csproj|D:\\Combined projects\\CRUD Using gRPC\\gRPC_Clients\\client\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{DD45FD4B-ECAC-4311-8DF8-806A83AFF899}|Client\\Client.csproj|solutionrelative:client\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+      "AbsoluteMoniker": "D:0:0:{DD45FD4B-ECAC-4311-8DF8-806A83AFF899}|Client\\Client.csproj|D:\\Combined projects\\CRUD Using gRPC\\gRPC_Clients\\client\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DD45FD4B-ECAC-4311-8DF8-806A83AFF899}|Client\\Client.csproj|solutionrelative:client\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{DD45FD4B-ECAC-4311-8DF8-806A83AFF899}|Client\\Client.csproj|D:\\Combined projects\\CRUD Using gRPC\\gRPC_Clients\\client\\protos\\greet.proto||{3B902123-F8A7-4915-9F01-361F908088D0}",
       "RelativeMoniker": "D:0:0:{DD45FD4B-ECAC-4311-8DF8-806A83AFF899}|Client\\Client.csproj|solutionrelative:client\\protos\\greet.proto||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DD45FD4B-ECAC-4311-8DF8-806A83AFF899}|Client\\Client.csproj|D:\\Combined projects\\CRUD Using gRPC\\gRPC_Clients\\client\\services\\initialization.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DD45FD4B-ECAC-4311-8DF8-806A83AFF899}|Client\\Client.csproj|solutionrelative:client\\services\\initialization.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DD45FD4B-ECAC-4311-8DF8-806A83AFF899}|Client\\Client.csproj|d:\\combined projects\\crud using grpc\\grpc_clients\\client\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{DD45FD4B-ECAC-4311-8DF8-806A83AFF899}|Client\\Client.csproj|solutionrelative:client\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     }
   ],
   "DocumentGroupContainers": [
@@ -22,7 +30,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 4,
+          "SelectedChildIndex": 6,
           "Children": [
             {
               "$type": "Bookmark",
@@ -35,6 +43,32 @@
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{e506b91c-c606-466a-90a9-123d1d1e12b3}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Program.cs",
+              "DocumentMoniker": "D:\\Combined projects\\CRUD Using gRPC\\gRPC_Clients\\Client\\Program.cs",
+              "RelativeDocumentMoniker": "Client\\Program.cs",
+              "ToolTip": "D:\\Combined projects\\CRUD Using gRPC\\gRPC_Clients\\Client\\Program.cs",
+              "RelativeToolTip": "Client\\Program.cs",
+              "ViewState": "AQIAAAMAAAAAAAAAAAAwwA0AAAAMAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-03-05T04:25:45.543Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Initialization.cs",
+              "DocumentMoniker": "D:\\Combined projects\\CRUD Using gRPC\\gRPC_Clients\\Client\\Services\\Initialization.cs",
+              "RelativeDocumentMoniker": "Client\\Services\\Initialization.cs",
+              "ToolTip": "D:\\Combined projects\\CRUD Using gRPC\\gRPC_Clients\\Client\\Services\\Initialization.cs",
+              "RelativeToolTip": "Client\\Services\\Initialization.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAADIAAAAeAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-03-04T11:11:27.426Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -57,14 +91,14 @@
               "RelativeDocumentMoniker": "Client\\Form1.cs",
               "ToolTip": "D:\\Combined projects\\CRUD Using gRPC\\gRPC_Clients\\Client\\Form1.cs",
               "RelativeToolTip": "Client\\Form1.cs",
-              "ViewState": "AQIAAHUAAAAAAAAAAAAgwIIAAAARAAAA",
+              "ViewState": "AQIAAGwAAAAAAAAAAADgv20AAAAUAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-03-04T06:53:14.74Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 4,
               "Title": "Form1.cs [Design]",
               "DocumentMoniker": "D:\\Combined projects\\CRUD Using gRPC\\gRPC_Clients\\Client\\Form1.cs",
               "RelativeDocumentMoniker": "Client\\Form1.cs",

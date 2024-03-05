@@ -40,6 +40,7 @@
             label_status = new Label();
             label_errors = new Label();
             button_clearDGV = new Button();
+            richTextBox_log = new RichTextBox();
             ((System.ComponentModel.ISupportInitialize)dgv_display).BeginInit();
             SuspendLayout();
             // 
@@ -167,6 +168,16 @@
             button_clearDGV.UseVisualStyleBackColor = true;
             button_clearDGV.Click += button_clearDGV_Click;
             // 
+            // richTextBox_log
+            // 
+            richTextBox_log.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            richTextBox_log.Location = new Point(1065, 6);
+            richTextBox_log.Name = "richTextBox_log";
+            richTextBox_log.ReadOnly = true;
+            richTextBox_log.Size = new Size(556, 912);
+            richTextBox_log.TabIndex = 14;
+            richTextBox_log.Text = "";
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
@@ -174,7 +185,8 @@
             AutoSize = true;
             AutoSizeMode = AutoSizeMode.GrowAndShrink;
             BackColor = Color.DarkCyan;
-            ClientSize = new Size(1071, 929);
+            ClientSize = new Size(1629, 929);
+            Controls.Add(richTextBox_log);
             Controls.Add(button_clearDGV);
             Controls.Add(label_errors);
             Controls.Add(label_status);
@@ -210,5 +222,6 @@
         private Label label_status;
         private Label label_errors;
         private Button button_clearDGV;
+        private RichTextBox richTextBox_log;
     }
 }

@@ -20,7 +20,6 @@ Log.Logger = new LoggerConfiguration()
     .ReadFrom.Configuration(configuration)
     .CreateLogger();
 
-
 builder.Host.UseSerilog();
 
 builder.Configuration.AddJsonFile("appsettings.json", false);
