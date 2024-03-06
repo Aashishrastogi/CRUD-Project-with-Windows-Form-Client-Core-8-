@@ -60,13 +60,22 @@ public class DatabaseContext
         return new SqlConnection(_config.GetValue<string>("connectionstrings"));
     }
 
-    public bool Preprocessing_Database(int operations)
+    public  bool Preprocessing_Database(int operations)
     {
+
+        for (int i = 0; i < 120; i++)
+        {
+            _log.LogInformation($"Waiting for {i} seconds");
+        }
+        
+        
         switch (operations)
         {
             case 1:
                 _log.LogInformation("Database cleaned as requested by the User");
                 return true;
+            case 2:
+                
             default:
                 return false;
         }

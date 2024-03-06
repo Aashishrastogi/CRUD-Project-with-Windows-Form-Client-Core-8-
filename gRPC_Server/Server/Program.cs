@@ -122,6 +122,7 @@ app.MapGrpcService<AuthenticationService>();
 app.Services.GetRequiredService<GreeterDatabaseContext>();
 var databaseServices = app.Services.GetRequiredService<DatabaseContext>();
 var status = databaseServices.Preprocessing_Database(builder.Configuration.GetValue<int>("DatabaseOperations"));
+Console.WriteLine("Waiting Operation completed");
 if (status != true) throw new Exception("Database Cleanup not successful");
 
 #endregion
