@@ -8,8 +8,12 @@ using Server.DatabaseContext;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Configuration.AddJsonFile("appsettings.json", false);
 // Add services to the container.
+
 builder.Services.AddGrpc();
+
+#region Serilog
 
 var configuration = new ConfigurationBuilder()
     .SetBasePath(Directory.GetCurrentDirectory())
@@ -25,7 +29,9 @@ Log.Logger = new LoggerConfiguration()
 
 builder.Host.UseSerilog();
 
-builder.Configuration.AddJsonFile("appsettings.json", false);
+#endregion
+
+#region JWT Authentication and Authorization
 
 builder.Services.AddAuthentication
     (authenticationOptions =>
@@ -51,51 +57,35 @@ builder.Services.AddAuthentication
 
 builder.Services.AddAuthorization();
 
-// Database Configuration
-/*builder.Services.AddSingleton<DbConnectionStringBuilder>(provider =>
-{
-    var dbStringconfiguration = provider.GetRequiredService<IConfiguration>();
-    var connectionStringBuilder = new SqlConnectionStringBuilder
-    {
-        ConnectionString = dbStringconfiguration.GetConnectionString("ImportantDatabase")
-       // Password = dbStringconfiguration.GetSection("SecurePasswords").GetValue<string>("ImportantDatabasePassword")
-    };
-    return connectionStringBuilder;
-});*/
+#endregion
 
-// Database Connection
-/*builder.Services.AddTransient<IDbConnection>(provider =>
-{
-    var builder2 = provider.GetRequiredService<DbConnectionStringBuilder>();
-   // var providerFactory = DbProviderFactories.GetFactory("Microsoft.Data.SqlClient");
-   if (!DbProviderFactories.TryGetFactory("Microsoft.Data.SqlClient", out var providerFactory))
-   {
-      
-       throw new InvalidOperationException("Microsoft.Data.SqlClient provider factory is not registered.");
-   }
-    var conn = providerFactory.CreateConnection();
-    conn.ConnectionString = builder2.ConnectionString;
-    return conn;
-});*/
+#region Singleton Dependencies
+
 builder.Services.AddSingleton<DatabaseContext>();
 builder.Services.AddSingleton<GreeterDatabaseContext>();
+
+#endregion
 
 var app = builder.Build();
 
 app.UseAuthentication();
 app.UseAuthorization();
-// Configure the HTTP request pipeline.
+
+#region gRPC ServicesRegistration
 
 app.MapGrpcService<GreeterService>();
 app.MapGrpcService<AuthenticationService>();
 
+#endregion
+
+#region CompileTime Database Operations
 
 app.Services.GetRequiredService<GreeterDatabaseContext>();
 var databaseServices = app.Services.GetRequiredService<DatabaseContext>();
-
 var status = databaseServices.Preprocessing_Database(builder.Configuration.GetValue<int>("DatabaseOperations"));
-
 if (status != true) throw new Exception("Database Cleanup not successful");
+
+#endregion
 app.MapGet("/",
     () =>
         "Communication with gRPC endpoints must be made through a gRPC client. To learn how to create a client, visit: https://go.microsoft.com/fwlink/?linkid=2086909");
