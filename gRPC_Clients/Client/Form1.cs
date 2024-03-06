@@ -9,7 +9,9 @@ namespace Client
     {
         private Greeter.GreeterClient _client;
         private readonly DataTable _dtResponse = new DataTable("ResponseTable");
-       
+        private AuthenticationResponse _jwtResponseToken;
+        private Metadata _metadata;
+
 
         public Form1()
         {
@@ -22,9 +24,23 @@ namespace Client
         private void Form1_Load(object sender, EventArgs e)
         {
             var startup = new Initialization();
-            _client = startup.Load(ConnectionStatus)!;
+            _client = startup.Load(ConnectionStatus,AuthenticationResponseInfo)!;
             dgv_display.DataSource = _dtResponse;
 
+        }
+
+        private void AuthenticationResponseInfo(AuthenticationResponse jwtResponseToken)
+        { 
+            _jwtResponseToken = jwtResponseToken;
+            richTextBox_jwtTokendescription.AppendText($"Token : {jwtResponseToken.AccessToken} \n ExpiresIn : {jwtResponseToken.ExpiresIn}");
+
+            _metadata = Metadata(jwtResponseToken);
+        }
+
+        private Metadata Metadata(AuthenticationResponse response)
+        {
+            var returningMetadata = new Metadata { { "Authorization", $"Bearer {response.AccessToken}" } };
+            return returningMetadata;
         }
 
         private void ConnectionStatus(string status)
@@ -40,7 +56,7 @@ namespace Client
 
         private async Task ProcessResponseStream(object sender, EventArgs eventArgs)
         {
-            using var call = _client.RequestAllData(new DataRequest { Request = "RequestingAllData" });
+            using var call = _client.RequestAllData(new DataRequest { Request = "RequestingAllData" },_metadata);
             var responseTask = Task.Run(async () =>
             {
                 await foreach (var message in call.ResponseStream.ReadAllAsync())
@@ -72,7 +88,7 @@ namespace Client
 
                 Invoke(new Action(() =>
                 {
-                    var response = _client.SayGreetingsAsync(new HelloRequest { Name = $"{richTextBox_name.Text}" });
+                    var response = _client.SayGreetingsAsync(new HelloRequest { Name = $"{richTextBox_name.Text}" },_metadata);
                     label_status.Text = response.ResponseAsync.Result.Message;
                 }));
             }
@@ -110,7 +126,7 @@ namespace Client
                     Invoke(new Action((() =>
                     {
                         var updateResponse =
-                            _client.UpdatingRecordsAsync(new Record { RecordName = $"{richTextBox_name.Text}" });
+                            _client.UpdatingRecordsAsync(new Record { RecordName = $"{richTextBox_name.Text}" }, _metadata);
                         label_status.Text = updateResponse.ResponseAsync.Result.Status;
                     })));
                 }
@@ -138,7 +154,7 @@ namespace Client
                     Invoke(new Action((() =>
                     {
                         var deletionResponse =
-                            _client.DeletingRecordAsync(new Record_deletion{RecordName = $"{richTextBox_name.Text}" });
+                            _client.DeletingRecordAsync(new Record_deletion{RecordName = $"{richTextBox_name.Text}" }, _metadata);
                         label_status.Text = deletionResponse.ResponseAsync.Result.DeletionResponseStatus;
                     })));
                 }

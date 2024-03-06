@@ -12,10 +12,9 @@ service Greeter {
   rpc RequestAllData(DataRequest) returns (stream ResponseData);
   rpc UpdatingRecords(Record) returns (UpdateResponseStatus);
   rpc DeletingRecord(Record_deletion) returns (DeletionStatus);
-  
  }
-
-  message Record_deletion{
+ 
+ message Record_deletion{
   string RecordName = 1;
  }
  

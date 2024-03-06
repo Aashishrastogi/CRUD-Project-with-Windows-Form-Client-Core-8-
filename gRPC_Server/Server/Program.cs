@@ -1,3 +1,6 @@
+using System.Text;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
 using Server.Services;
 using Serilog;
 using Server.Database_Operations;
@@ -23,6 +26,30 @@ Log.Logger = new LoggerConfiguration()
 builder.Host.UseSerilog();
 
 builder.Configuration.AddJsonFile("appsettings.json", false);
+
+builder.Services.AddAuthentication
+    (authenticationOptions =>
+        {
+            authenticationOptions.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+            authenticationOptions.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+        }
+    )
+    .AddJwtBearer(jwtBearerOption =>
+    {
+        jwtBearerOption.RequireHttpsMetadata = true;
+        jwtBearerOption.SaveToken = true;
+        jwtBearerOption.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateIssuerSigningKey = true,
+            IssuerSigningKey =
+                new SymmetricSecurityKey(
+                    Encoding.ASCII.GetBytes($"{builder.Configuration.GetValue(typeof(string), "JWT_TOKEN_KEY")}")),
+            ValidateIssuer = false,
+            ValidateAudience = false
+        };
+    });
+
+builder.Services.AddAuthorization();
 
 // Database Configuration
 /*builder.Services.AddSingleton<DbConnectionStringBuilder>(provider =>
@@ -50,15 +77,19 @@ builder.Configuration.AddJsonFile("appsettings.json", false);
     conn.ConnectionString = builder2.ConnectionString;
     return conn;
 });*/
-
 builder.Services.AddSingleton<DatabaseContext>();
 builder.Services.AddSingleton<GreeterDatabaseContext>();
 
 var app = builder.Build();
 
-
+app.UseAuthentication();
+app.UseAuthorization();
 // Configure the HTTP request pipeline.
+
 app.MapGrpcService<GreeterService>();
+app.MapGrpcService<AuthenticationService>();
+
+
 app.Services.GetRequiredService<GreeterDatabaseContext>();
 var databaseServices = app.Services.GetRequiredService<DatabaseContext>();
 

@@ -41,6 +41,7 @@
             label_errors = new Label();
             button_clearDGV = new Button();
             richTextBox_log = new RichTextBox();
+            richTextBox_jwtTokendescription = new RichTextBox();
             ((System.ComponentModel.ISupportInitialize)dgv_display).BeginInit();
             SuspendLayout();
             // 
@@ -174,9 +175,18 @@
             richTextBox_log.Location = new Point(1065, 6);
             richTextBox_log.Name = "richTextBox_log";
             richTextBox_log.ReadOnly = true;
-            richTextBox_log.Size = new Size(556, 912);
+            richTextBox_log.Size = new Size(556, 572);
             richTextBox_log.TabIndex = 14;
             richTextBox_log.Text = "";
+            // 
+            // richTextBox_jwtTokendescription
+            // 
+            richTextBox_jwtTokendescription.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            richTextBox_jwtTokendescription.Location = new Point(1065, 584);
+            richTextBox_jwtTokendescription.Name = "richTextBox_jwtTokendescription";
+            richTextBox_jwtTokendescription.Size = new Size(556, 333);
+            richTextBox_jwtTokendescription.TabIndex = 15;
+            richTextBox_jwtTokendescription.Text = "";
             // 
             // Form1
             // 
@@ -186,6 +196,7 @@
             AutoSizeMode = AutoSizeMode.GrowAndShrink;
             BackColor = Color.DarkCyan;
             ClientSize = new Size(1629, 929);
+            Controls.Add(richTextBox_jwtTokendescription);
             Controls.Add(richTextBox_log);
             Controls.Add(button_clearDGV);
             Controls.Add(label_errors);
@@ -223,5 +234,6 @@
         private Label label_errors;
         private Button button_clearDGV;
         private RichTextBox richTextBox_log;
+        private RichTextBox richTextBox_jwtTokendescription;
     }
 }

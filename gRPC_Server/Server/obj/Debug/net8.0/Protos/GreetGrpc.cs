@@ -128,7 +128,7 @@ namespace Server {
       }
 
       [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
-      public virtual Task<HelloReply> SayGreetings(global::Server.HelloRequest request, grpc::ServerCallContext context)
+      public virtual global::System.Threading.Tasks.Task<global::Server.HelloReply> SayGreetings(global::Server.HelloRequest request, grpc::ServerCallContext context)
       {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
       }
@@ -140,7 +140,7 @@ namespace Server {
       }
 
       [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
-      public virtual Task<UpdateResponseStatus> UpdatingRecords(global::Server.Record request, grpc::ServerCallContext context)
+      public virtual global::System.Threading.Tasks.Task<global::Server.UpdateResponseStatus> UpdatingRecords(global::Server.Record request, grpc::ServerCallContext context)
       {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
       }

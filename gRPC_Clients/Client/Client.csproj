@@ -9,6 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Protos\Authentication.proto" />
     <None Remove="Protos\greet.proto" />
   </ItemGroup>
 
@@ -26,6 +27,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Protobuf Include="Protos\Authentication.proto" GrpcServices="Client">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Protobuf>
     <Protobuf Include="Protos\greet.proto" GrpcServices="Client">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Protobuf>

@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.NetworkInformation;
+using System.Security.Authentication;
 using System.Text;
 using System.Threading.Tasks;
 using Grpc.Core;
@@ -12,19 +13,24 @@ namespace Client.Services
 {
     internal class Initialization
     {
-
-        
-        public  Greeter.GreeterClient?Load(Action<string> connectionStatus)
+        public Greeter.GreeterClient? Load(Action<string> connectionStatus,Action<AuthenticationResponse> authenticationResponseAction)
         {
             try
             {
-
-
                 var channel = GrpcChannel.ForAddress("https://localhost:7157");
-                
+
                 if (PingCheck(channel) == "OK")
                 {
                     var client = new Greeter.GreeterClient(channel);
+
+                    var authenticationClient = new Authentication.AuthenticationClient(channel);
+
+                    var authenticationResponse = authenticationClient.Authenticate(new AuthenticationRequest
+                    {
+                        Username = "admin",
+                        Password = "password"
+                    });
+                    authenticationResponseAction(authenticationResponse);
 
                     connectionStatus("Connection Established with the Server");
 
@@ -34,7 +40,6 @@ namespace Client.Services
                 {
                     throw new Exception("ServerUnreachable");
                 }
-
             }
             catch (Exception e) when (e.Message == "ServerUnreachable")
             {
@@ -53,7 +58,6 @@ namespace Client.Services
                 pingclient.SayHelloAsync(new HelloRequest { Name = "dummy" });
 
                 return "OK";
-
             }
             catch (RpcException e) when (e.StatusCode == StatusCode.Unavailable)
             {
@@ -61,6 +65,4 @@ namespace Client.Services
             }
         }
     }
-
-    
 }

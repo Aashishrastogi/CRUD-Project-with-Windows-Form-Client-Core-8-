@@ -54,7 +54,7 @@ public class DatabaseContext
         }
         catch (SqlException ex)
         {
-            _log.LogError("Database unreachable");
+            _log.LogError($"Database unreachable {ex.Message}");
             
         }
         return new SqlConnection(_config.GetValue<string>("connectionstrings"));

@@ -1,8 +1,10 @@
 using Grpc.Core;
+using Microsoft.AspNetCore.Authorization;
 using Server.DatabaseContext;
 
 namespace Server.Services;
 
+[Authorize]
 public class GreeterService : Greeter.GreeterBase
 {
     private readonly Database_Operations.DatabaseContext _databaseContext;
@@ -107,7 +109,7 @@ public class GreeterService : Greeter.GreeterBase
 
         catch (Exception e)
         {
-            _logger.LogError("error in executing UpdatingRecord RPC");
+            _logger.LogError($"error in executing UpdatingRecord RPC + {e.Message}");
         }
 
         return returningvariables;
@@ -145,7 +147,7 @@ public class GreeterService : Greeter.GreeterBase
 
         catch (Exception e)
         {
-            _logger.LogError("error in executing DeletingRecord RPC");
+            _logger.LogError($"error in executing DeletingRecord RPC +{e.Message}");
         }
         return returningvariables;
     }

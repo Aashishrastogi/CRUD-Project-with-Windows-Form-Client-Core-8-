@@ -301,3 +301,4 @@ D:\Combined projects\CRUD Using gRPC\gRPC_Server\Server\obj\Debug\net8.0\refint\
 D:\Combined projects\CRUD Using gRPC\gRPC_Server\Server\obj\Debug\net8.0\Server.pdb
 D:\Combined projects\CRUD Using gRPC\gRPC_Server\Server\obj\Debug\net8.0\Server.genruntimeconfig.cache
 D:\Combined projects\CRUD Using gRPC\gRPC_Server\Server\obj\Debug\net8.0\ref\Server.dll
+D:\Combined projects\CRUD Using gRPC\gRPC_Server\Server\bin\Debug\net8.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
