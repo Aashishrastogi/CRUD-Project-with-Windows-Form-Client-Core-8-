@@ -4,7 +4,6 @@ using Server.DatabaseContext;
 
 namespace Server.Services;
 
-[Authorize]
 public class GreeterService : Greeter.GreeterBase
 {
     private readonly Database_Operations.DatabaseContext _databaseContext;
@@ -19,14 +18,15 @@ public class GreeterService : Greeter.GreeterBase
         _repository = repository;
     }
 
+    [Authorize(Roles = "Admin,User")]
     public override async Task RequestAllData(
         DataRequest request,
         IServerStreamWriter<ResponseData> responseStream,
         ServerCallContext context)
     {
-        var dataRecievedFromDatabase = _databaseContext.Query<ResponseData>("SELECT * FROM Greetings");
+        var dataReceivedFromDatabase = _databaseContext.Query<ResponseData>("SELECT * FROM Greetings");
 
-        foreach (ResponseData entry in dataRecievedFromDatabase)
+        foreach (ResponseData entry in dataReceivedFromDatabase)
         {
             //  await Task.Delay(5000);
             await responseStream.WriteAsync(
@@ -38,6 +38,7 @@ public class GreeterService : Greeter.GreeterBase
         }
     }
 
+    [Authorize]
     public override Task<HelloReply> SayHello(HelloRequest request, ServerCallContext context)
     {
         return Task.FromResult(new HelloReply
@@ -46,6 +47,7 @@ public class GreeterService : Greeter.GreeterBase
         });
     }
 
+    [Authorize(Roles = "Admin,User")]
     public override Task<HelloReply>? SayGreetings(HelloRequest request, ServerCallContext context)
     {
         Task<HelloReply>? returnVariables = null;
@@ -78,9 +80,10 @@ public class GreeterService : Greeter.GreeterBase
         return returnVariables;
     }
 
+    [Authorize(Roles = "Admin,User")]
     public override Task<UpdateResponseStatus>? UpdatingRecords(Record request, ServerCallContext context)
     {
-        Task<UpdateResponseStatus>? returningvariables = null;
+        Task<UpdateResponseStatus>? returningVariables = null;
         var status = _repository.UpdatingRecordsRepository(request, context);
 
         try
@@ -90,17 +93,17 @@ public class GreeterService : Greeter.GreeterBase
                 _logger.LogInformation(
                     $@"Record naming {request.RecordName} Time update by the server  with time - {DateTime.Now:u}");
 
-                returningvariables = Task.FromResult(new UpdateResponseStatus
+                returningVariables = Task.FromResult(new UpdateResponseStatus
                 {
                     Status = $"Time of Recording Updated for Name {request.RecordName}"
                 });
-                return returningvariables;
+                return returningVariables;
             }
             else
             {
                 _logger.LogError("Error in Query Execution");
 
-                returningvariables = Task.FromResult(new UpdateResponseStatus
+                returningVariables = Task.FromResult(new UpdateResponseStatus
                 {
                     Status = "Unreachable Database or incorrect query execution"
                 });
@@ -112,12 +115,13 @@ public class GreeterService : Greeter.GreeterBase
             _logger.LogError($"error in executing UpdatingRecord RPC + {e.Message}");
         }
 
-        return returningvariables;
+        return returningVariables;
     }
 
+    [Authorize(Roles = "Admin")]
     public override Task<DeletionStatus> DeletingRecord(Record_deletion request, ServerCallContext context)
     {
-        Task<DeletionStatus>? returningvariables = null;
+        Task<DeletionStatus>? returningVariables = null;
         var status = _repository.DeletingRecordRepository(request, context);
 
         try
@@ -127,17 +131,17 @@ public class GreeterService : Greeter.GreeterBase
                 _logger.LogInformation(
                     $"Record  naming {request.RecordName} deleted from database ");
 
-                returningvariables = Task.FromResult(
+                returningVariables = Task.FromResult(
                     new DeletionStatus
                     {
                         DeletionResponseStatus = $"Record naming {request.RecordName} deleted successfully"
                     });
-                return returningvariables;
+                return returningVariables;
             }
             else
             {
                 _logger.LogError("Error in Query Execution");
-                returningvariables = Task.FromResult(
+                returningVariables = Task.FromResult(
                     new DeletionStatus
                     {
                         DeletionResponseStatus = "Unreachable Database or incorrect query execution"
@@ -149,6 +153,7 @@ public class GreeterService : Greeter.GreeterBase
         {
             _logger.LogError($"error in executing DeletingRecord RPC +{e.Message}");
         }
-        return returningvariables;
+
+        return returningVariables;
     }
 }

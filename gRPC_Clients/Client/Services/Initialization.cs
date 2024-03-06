@@ -22,19 +22,27 @@ namespace Client.Services
                 if (PingCheck(channel) == "OK")
                 {
                     var client = new Greeter.GreeterClient(channel);
-
-                    var authenticationClient = new Authentication.AuthenticationClient(channel);
-
-                    var authenticationResponse = authenticationClient.Authenticate(new AuthenticationRequest
+                    try
                     {
-                        Username = "admin",
-                        Password = "password"
-                    });
-                    authenticationResponseAction(authenticationResponse);
 
-                    connectionStatus("Connection Established with the Server");
+                        var authenticationClient = new Authentication.AuthenticationClient(channel);
 
-                    return client;
+                        var authenticationResponse = authenticationClient.Authenticate(new AuthenticationRequest
+                        {
+                            Username = "admin",
+                            Password = "admin"
+                        });
+                        authenticationResponseAction(authenticationResponse);
+
+                        connectionStatus("Connection Established with the Server with Authenticated User Credentials");
+
+                        return client;
+
+                    }
+                    catch (Exception authException)
+                    {
+                        connectionStatus("User credentials not Valid");
+                    }
                 }
                 else
                 {
