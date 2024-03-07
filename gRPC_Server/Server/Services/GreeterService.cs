@@ -1,9 +1,11 @@
+using System.Diagnostics.CodeAnalysis;
 using Grpc.Core;
 using Microsoft.AspNetCore.Authorization;
 using Server.DatabaseContext;
 
 namespace Server.Services;
 
+[SuppressMessage("ReSharper", "TemplateIsNotCompileTimeConstantProblem")]
 public class GreeterService : Greeter.GreeterBase
 {
     private readonly Database_Operations.DatabaseContext _databaseContext;
@@ -24,17 +26,35 @@ public class GreeterService : Greeter.GreeterBase
         IServerStreamWriter<ResponseData> responseStream,
         ServerCallContext context)
     {
+        context.CancellationToken.ThrowIfCancellationRequested();
         var dataReceivedFromDatabase = _databaseContext.Query<ResponseData>("SELECT * FROM Greetings");
-
-        foreach (ResponseData entry in dataReceivedFromDatabase)
+        try
         {
-            //  await Task.Delay(5000);
-            await responseStream.WriteAsync(
-                new ResponseData
+            foreach (ResponseData entry in dataReceivedFromDatabase)
+            {
+                //await Task.Delay(1000);
+                if (!context.CancellationToken.IsCancellationRequested)
                 {
-                    Name = $"{entry.Name}",
-                    Time = $"{entry.Time}"
-                });
+                   await responseStream.WriteAsync(
+                        new ResponseData
+                        {
+                            Name = $"{entry.Name}",
+                            Time = $"{entry.Time}"
+                        });
+                }
+            }
+        }
+
+
+        catch (RpcException responseException)
+        {
+            _logger.LogError(responseException.Message);
+        }
+        catch (OperationCanceledException cancellationTokenReceived)
+        {
+            _logger.LogInformation($"Cancellation token Was thrown By The client " +
+                                   $"\n{cancellationTokenReceived.CancellationToken}" +
+                                   $"\n{cancellationTokenReceived.Data}");
         }
     }
 

@@ -69,3 +69,4 @@ D:\Combined projects\CRUD Using gRPC\gRPC_Clients\Client\obj\Debug\net8.0-window
 D:\Combined projects\CRUD Using gRPC\gRPC_Clients\Client\obj\Debug\net8.0-windows\Client.pdb
 D:\Combined projects\CRUD Using gRPC\gRPC_Clients\Client\obj\Debug\net8.0-windows\Client.genruntimeconfig.cache
 D:\Combined projects\CRUD Using gRPC\gRPC_Clients\Client\obj\Debug\net8.0-windows\ref\Client.dll
+D:\Combined projects\CRUD Using gRPC\gRPC_Clients\Client\obj\Debug\net8.0-windows\Client.Login.resources

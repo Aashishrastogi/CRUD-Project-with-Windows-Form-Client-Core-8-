@@ -11,8 +11,8 @@ namespace Client
         private readonly DataTable _dtResponse = new DataTable("ResponseTable");
         private AuthenticationResponse _jwtResponseToken;
         private Metadata _metadata;
-
-
+        private CancellationTokenSource _cancellationsource = null;
+        
         public Form1()
         {
             InitializeComponent();
@@ -24,13 +24,14 @@ namespace Client
         private void Form1_Load(object sender, EventArgs e)
         {
             var startup = new Initialization();
-            _client = startup.Load(ConnectionStatus,AuthenticationResponseInfo)!;
+            _client = startup.Load(ConnectionStatus, AuthenticationResponseInfo)!;
             dgv_display.DataSource = _dtResponse;
+          
 
-        }
+    }
 
         private void AuthenticationResponseInfo(AuthenticationResponse jwtResponseToken)
-        { 
+        {
             _jwtResponseToken = jwtResponseToken;
             richTextBox_jwtTokendescription.AppendText($"Token : {jwtResponseToken.AccessToken} \n ExpiresIn : {jwtResponseToken.ExpiresIn}");
 
@@ -54,22 +55,40 @@ namespace Client
             label_status.Text = @" Data Successfully loaded from the Database ";
         }
 
+      
+         
         private async Task ProcessResponseStream(object sender, EventArgs eventArgs)
         {
-            using var call = _client.RequestAllData(new DataRequest { Request = "RequestingAllData" },_metadata);
+            //using var call = _client.RequestAllData(new DataRequest { Request = "RequestingAllData" },_metadata);
+            using var call = _client.RequestAllData(new DataRequest { Request = "GetAllData" }, _metadata);
             var responseTask = Task.Run(async () =>
             {
-                await foreach (var message in call.ResponseStream.ReadAllAsync())
-                {
-                    Invoke(new Action(() =>
+                
+                
+                    await foreach (var message in call.ResponseStream.ReadAllAsync())
                     {
-                        _dtResponse.Rows.Add(
-                        message.Name,
-                        message.Time
-                        );
+                        Invoke(new Action(() =>
+                        {
+                            _dtResponse.Rows.Add(
+                                message.Name,
+                                message.Time
+                            );
 
-                    }));
-                }
+                        }));
+                    }
+                
+               /*
+                catch (RpcException e)
+                {
+                    Invoke(() =>
+                    {
+                        richTextBox_log.Clear();
+                        richTextBox_log.AppendText($"User Request Timed out \nFreeing up the Resources \nStatus code :{e.StatusCode} \nSource :{e.Source}");
+
+                    });
+
+                }*/
+                
 
             });
             await responseTask;
@@ -88,7 +107,7 @@ namespace Client
 
                 Invoke(new Action(() =>
                 {
-                    var response = _client.SayGreetingsAsync(new HelloRequest { Name = $"{richTextBox_name.Text}" },_metadata);
+                    var response = _client.SayGreetingsAsync(new HelloRequest { Name = $"{richTextBox_name.Text}" }, _metadata);
                     label_status.Text = response.ResponseAsync.Result.Message;
                 }));
             }
@@ -154,7 +173,7 @@ namespace Client
                     Invoke(new Action((() =>
                     {
                         var deletionResponse =
-                            _client.DeletingRecordAsync(new Record_deletion{RecordName = $"{richTextBox_name.Text}" }, _metadata);
+                            _client.DeletingRecordAsync(new Record_deletion { RecordName = $"{richTextBox_name.Text}" }, _metadata);
                         label_status.Text = deletionResponse.ResponseAsync.Result.DeletionResponseStatus;
                     })));
                 }
